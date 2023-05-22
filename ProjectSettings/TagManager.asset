@@ -8,6 +8,10 @@ TagManager:
   - SeedPouch
   - WaterCan
   - CropBag
+  - Grass
+  - Farmland
+  - PlantedSeeds
+  - GrownCrops
   layers:
   - Default
   - TransparentFX
