@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
+    int playerMoney = 0;
+
     Keyboard keyboard;
     GameObject equippedItem;
 
@@ -73,5 +75,11 @@ public class Inventory : MonoBehaviour
     public GameObject GetEquippedItem()
     {
         return equippedItem;
+    }
+
+    public void SetPlayerMoney(int amount)
+    {
+        playerMoney += amount;
+        Debug.Log(playerMoney);
     }
 }

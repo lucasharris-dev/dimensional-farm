@@ -12,6 +12,7 @@ TagManager:
   - Farmland
   - PlantedSeeds
   - GrownCrops
+  - Merchant
   layers:
   - Default
   - TransparentFX

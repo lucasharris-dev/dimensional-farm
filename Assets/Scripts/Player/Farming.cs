@@ -23,6 +23,7 @@ public class Farming : MonoBehaviour
     bool isOnFarmland = false;
     bool isOnPlantedSeeds = false;
     bool isOnGrownCrops = false;
+    bool hasSeeds = true; // set equal to a bool (hasSeeds = (numSeeds > 0) )
 
     Mouse mouse;
     Inventory inventory;
@@ -113,7 +114,7 @@ public class Farming : MonoBehaviour
 
     void PlantSeed()
     {
-        if (isOnFarmland)
+        if (isOnFarmland && hasSeeds)
         {
             Instantiate(plantedSeedsPrefab, collidedObject.transform.position, Quaternion.identity);
             Destroy(collidedObject);
