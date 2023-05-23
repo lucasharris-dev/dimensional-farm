@@ -5,13 +5,20 @@ using UnityEngine.InputSystem;
 
 public class CharacterInteraction : MonoBehaviour
 {
-    string merchantTag = "Merchant";
-    bool isNextToMerchant = false;
+    const string chefTag = "Chef";
+    const string blacksmithTag = "Blacksmith";
+    const string travelerTag = "Traveler";
+    bool isNextToChef = false;
+    bool isNextToBlacksmith = false;
+    bool isNextToTraveler = false;
     bool canSell = true;
 
     Keyboard keyboard;
     Inventory inventory;
-    MerchantInventory merchant;
+    MerchantInteractions merchant;
+    ChefInteractions chef;
+    BlacksmithInteractions blacksmith;
+    TravelerInteractions traveler;
 
     void Awake()
     {
@@ -33,28 +40,61 @@ public class CharacterInteraction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == merchantTag)
+        GameObject otherObject = other.gameObject;
+
+        if (!(otherObject.tag == chefTag || otherObject.tag == blacksmithTag || otherObject.tag == travelerTag))
         {
-            isNextToMerchant = true;
-            merchant = other.gameObject.GetComponent<MerchantInventory>();
-            Interact();
+            return;
         }
+
+        merchant = other.gameObject.GetComponent<MerchantInteractions>();
+
+        switch (other.gameObject.tag)
+        {
+            case chefTag:
+                isNextToChef = true;
+                chef = otherObject.GetComponent<ChefInteractions>();
+                break;
+            case blacksmithTag:
+                isNextToBlacksmith = true;
+                blacksmith = otherObject.GetComponent<BlacksmithInteractions>();
+                break;
+            case travelerTag:
+                isNextToTraveler = true;
+                traveler = otherObject.GetComponent<TravelerInteractions>();
+                break;
+        }
+
+        Interact();
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == merchantTag)
+        if (other.gameObject.tag == chefTag)
         {
-            isNextToMerchant = false;
+            isNextToChef = false;
         }
     }
 
     void Interact()
     {
-        if (canSell && isNextToMerchant && keyboard.eKey.isPressed)
+        if (keyboard == null || !keyboard.eKey.isPressed)
+        {
+            return;
+        }
+
+        if (canSell && isNextToChef)
         {
             SellItem("name", 3); // temp values for testing
             canSell = false; // temp for testing; set back to true once it is confirmed that the player has enough to sell
+        }
+        else if (isNextToBlacksmith)
+        {
+            BuyItem("mana crystal", 3);
+        }
+        else if (isNextToTraveler)
+        {
+            BuyItem("seed", 3);
         }
     }
 
@@ -63,8 +103,13 @@ public class CharacterInteraction : MonoBehaviour
         int profit = 0;
         for (int i = 0; i < itemCount; i++)
         {
-            profit += merchant.BuyItem(itemName);
+            profit += chef.BuyFromPlayer(itemName);
         }
         inventory.SetPlayerMoney(profit); // temp for testing
+    }
+
+    void BuyItem(string itemName, int itemCount)
+    {
+        merchant.SellToPlayer(itemName);
     }
 }

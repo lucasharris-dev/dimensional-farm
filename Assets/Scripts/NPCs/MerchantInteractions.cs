@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MerchantInventory : MonoBehaviour
+public class MerchantInteractions : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,8 +16,8 @@ public class MerchantInventory : MonoBehaviour
         
     }
 
-    public int BuyItem(string itemname)
+    public void SellToPlayer(string itemName)
     {
-        return 100;
+        Debug.Log("sold " + itemName);
     }
 }

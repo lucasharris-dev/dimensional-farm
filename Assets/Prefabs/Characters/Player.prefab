@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &354033854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354033855}
+  - component: {fileID: 354033856}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354033855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354033854}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.4389148, y: -0.7836504, z: 10.071952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7315549302580183329}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &354033856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354033854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcde2d4b7b67b9b42b15ad56a042c782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7315549301662047179
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +241,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 354033855}
   m_Father: {fileID: 7315549303006202013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -352,6 +397,7 @@ GameObject:
   - component: {fileID: 7315549303006202012}
   - component: {fileID: 7315549303006202080}
   - component: {fileID: 7315549303006202081}
+  - component: {fileID: 895037763}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -417,8 +463,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1537047067
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -476,7 +522,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &7315549303006202014
 MonoBehaviour:
@@ -521,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
+  sprintSpeed: 15
 --- !u!114 &7315549303006202080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,10 +592,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effc18e72ac39294f8dc319ab2054ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  farmTilemap: {fileID: 0}
+  grassRuleTile: {fileID: 11400000, guid: 4d10fad5c3543674aac60343a84950eb, type: 2}
+  farmlandRuleTile: {fileID: 11400000, guid: 99fa725bf7afb064f9b9c0978ba116f3, type: 2}
+  plantedFarmlandRuleTile: {fileID: 11400000, guid: 5c0b4b8a954f3614ea9efa1c876eac3f, type: 2}
+  fertileFarmlandRuleTile: {fileID: 11400000, guid: b22026ae8fed9f947b80a623d44ce304, type: 2}
+  fertilePlantedFarmlandRuleTile: {fileID: 11400000, guid: e252a082619c53e40afc0ab6fb83832e, type: 2}
   grassPrefab: {fileID: 8356146745893075278, guid: 3e6436bc32afcc048ac01b8dd3923096, type: 3}
   farmlandPrefab: {fileID: 4727990913879221272, guid: 94d4dd2319c0269498938f06dd6a0f3b, type: 3}
   plantedSeedsPrefab: {fileID: 717392854460366013, guid: d9a59472ea56bb441b380538ff36fd02, type: 3}
   grownCropsPrefab: {fileID: 4035354096377367909, guid: 2dd601e736767a94ab06633b1458e2e8, type: 3}
+--- !u!114 &895037763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7315549303006202011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fa37ed2b0f236409eae08a344a597b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7315549303254627823
 GameObject:
   m_ObjectHideFlags: 0

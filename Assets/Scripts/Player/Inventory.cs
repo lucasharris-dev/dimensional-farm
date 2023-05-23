@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Inventory : MonoBehaviour
 {
     int playerMoney = 0;
+    int lifetimeProfit = 0;
 
     Keyboard keyboard;
     GameObject equippedItem;
@@ -80,6 +81,6 @@ public class Inventory : MonoBehaviour
     public void SetPlayerMoney(int amount)
     {
         playerMoney += amount;
-        Debug.Log(playerMoney);
+        lifetimeProfit += playerMoney;
     }
 }

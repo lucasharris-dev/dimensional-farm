@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class Farming : MonoBehaviour
 {
+    [SerializeField] Tilemap farmTilemap;
+    [SerializeField] RuleTile grassRuleTile;
+    [SerializeField] RuleTile farmlandRuleTile;
+    [SerializeField] RuleTile plantedFarmlandRuleTile;
+    [SerializeField] RuleTile fertileFarmlandRuleTile;
+    [SerializeField] RuleTile fertilePlantedFarmlandRuleTile;
+
     [SerializeField] GameObject grassPrefab;
     [SerializeField] GameObject farmlandPrefab;
     [SerializeField] GameObject plantedSeedsPrefab;
@@ -12,18 +20,18 @@ public class Farming : MonoBehaviour
 
     const string grassTag = "Grass";
     const string farmlandTag = "Farmland";
+    const string plantedFarmlandTag = "PlantedFarmland";
+    const string fertileFarmlandTag = "FertileFarmland";
+    const string fertilePlantedFarmlandTag = "FertilePlantedFarmland";
     const string plantedSeedsTag = "PlantedSeeds";
     const string grownCropsTag = "GrownCrops";
+
     const string farmingToolTag = "FarmingTool";
     const string seedPouchTag = "SeedPouch";
     const string waterCanTag = "WaterCan";
     const string cropBagTag = "CropBag";
 
-    bool isOnGrass = false;
-    bool isOnFarmland = false;
-    bool isOnPlantedSeeds = false;
-    bool isOnGrownCrops = false;
-    bool hasSeeds = true; // set equal to a bool (hasSeeds = (numSeeds > 0) )
+    //bool hasSeeds = true; set equal to a bool (hasSeeds = (numSeeds > 0) ), will be in inventory probably
 
     Mouse mouse;
     Inventory inventory;
@@ -43,45 +51,15 @@ public class Farming : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         collidedObject = other.gameObject;
-
-        switch (other.gameObject.tag)
-        {
-            case grassTag:
-                isOnGrass = true;
-                break;
-            case farmlandTag:
-                isOnFarmland = true;
-                break;
-            case plantedSeedsTag:
-                isOnPlantedSeeds = true;
-                break;
-            case grownCropsTag:
-                isOnGrownCrops = true;
-                break;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        switch (other.gameObject.tag)
-        {
-            case grassTag:
-                isOnGrass = false;
-                break;
-            case farmlandTag:
-                isOnFarmland = false;
-                break;
-            case plantedSeedsTag:
-                isOnPlantedSeeds = false;
-                break;
-            case grownCropsTag:
-                isOnGrownCrops = false;
-                break;
-        }
     }
 
     void Interact()
     {
+        if (mouse == null || collidedObject == null)
+        {
+            return;
+        }
+
         if (mouse.leftButton.isPressed)
         {
             switch (inventory.GetEquippedItem().tag)
@@ -93,7 +71,7 @@ public class Farming : MonoBehaviour
                     PlantSeed();
                     break;
                 case waterCanTag:
-                    WaterCrop();
+                    WaterFarmland();
                     break;
                 case cropBagTag:
                     HarvestCrop();
@@ -102,42 +80,54 @@ public class Farming : MonoBehaviour
         }
     }
 
+    void ReplaceTile(RuleTile newRuleTile)
+    {
+        Vector3 collidedPosition = collidedObject.transform.position;
+        Vector3Int tilePosition = Vector3Int.FloorToInt(collidedPosition);
+        farmTilemap.SetTile(tilePosition, newRuleTile);
+    }
+
     void TillGround()
     {
-        if (isOnGrass)
+        if (collidedObject.tag == grassTag)
         {
-            Instantiate(farmlandPrefab, collidedObject.transform.position, Quaternion.identity); // Q.identity is 0 rotation
-            Destroy(collidedObject);
+            ReplaceTile(farmlandRuleTile);
+            
             Debug.Log("till ground");
         }
     }
 
     void PlantSeed()
     {
-        if (isOnFarmland && hasSeeds)
+        if (collidedObject.tag == farmlandTag || collidedObject.tag == fertileFarmlandTag)
         {
-            Instantiate(plantedSeedsPrefab, collidedObject.transform.position, Quaternion.identity);
-            Destroy(collidedObject);
+            ReplaceTile(plantedFarmlandRuleTile);
             Debug.Log("plant seed");
         }
     }
 
-    void WaterCrop()
+    void WaterFarmland()
     {
-        if (isOnPlantedSeeds)
+        if (collidedObject.tag == farmlandTag)
         {
-            Instantiate(grownCropsPrefab, collidedObject.transform.position, Quaternion.identity);
-            Destroy(collidedObject);
+            ReplaceTile(fertileFarmlandRuleTile);
+
+            Debug.Log("water crop");
+        }
+        else if (collidedObject.tag == plantedFarmlandTag)
+        {
+            ReplaceTile(fertilePlantedFarmlandRuleTile);
+            
             Debug.Log("water crop");
         }
     }
 
     void HarvestCrop()
     {
-        if (isOnGrownCrops)
+        if (collidedObject.tag == grownCropsTag)
         {
-            Instantiate(grassPrefab, collidedObject.transform.position, Quaternion.identity);
-            Destroy(collidedObject);
+            ReplaceTile(grassRuleTile); // temp, need to make it different depending on if the ground is fertilized
+            
             Debug.Log("harvest crop");
         }
     }

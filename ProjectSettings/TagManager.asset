@@ -12,7 +12,13 @@ TagManager:
   - Farmland
   - PlantedSeeds
   - GrownCrops
-  - Merchant
+  - PlantedFarmland
+  - FertileFarmland
+  - FertilePlantedFarmland
+  - Fence
+  - Chef
+  - Blacksmith
+  - Traveler
   layers:
   - Default
   - TransparentFX
@@ -20,7 +26,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -49,4 +55,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 815053151
+    locked: 0
+  - name: Characters
+    uniqueID: 2757920229
     locked: 0
