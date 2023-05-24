@@ -1,21 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TimeElapsed : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI timeText;
+
+    string[] weekdays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     string morning = "AM"; // maybe rename
-    string afternoon = "PM";
-    int hour = 12;
-    int minute = 0;
+    string night = "PM";
+    string timeTag = "Time";
+
+    int currentWeekdayIndex;
+    string currentWeekday;
     string halfOfDay;
+    int hour;
+    int minute;
     string currentTime;
-    bool atEndOfMinute = false;
+
+    int startingWeekdayIndex = 6;
+    int startingHour = 11;
+    int startingMinute = 50;
+    int lastSecond = 0;
+
 
     void Awake()
     {
-        halfOfDay = morning;
-        currentTime = hour.ToString() + ":" + minute.ToString() + " " + halfOfDay;
+        currentWeekday = weekdays[startingWeekdayIndex];
+        currentWeekdayIndex = startingWeekdayIndex;
+        halfOfDay = night;
+        hour = startingHour;
+        minute = startingMinute;
+        currentTime = FormatTime();
     }
 
     void Update()
@@ -25,58 +42,87 @@ public class TimeElapsed : MonoBehaviour
 
     void CurrentTime()
     {
-        IncrementMinute();
         
-        if (atEndOfMinute)
+        if (((int)Time.time) != lastSecond)
         {
-            IncrementHour();
+            minute += 1;
+            if (minute == 60)
+            {
+                hour = IncrementHour();
+                minute = 0;
+            }
         }
-        
-        else if (minute < 10)
+
+        FormatTime();
+
+        lastSecond = ((int)Time.time);
+
+        if (timeText == null)
         {
-            currentTime = hour.ToString() + ":0" + minute.ToString() + " " + halfOfDay;
+            return;
+        }
+
+        timeText.text = currentTime;
+    }
+
+    string FormatTime()
+    {
+        if (minute < 10)
+        {
+            currentTime = currentWeekday + " " + hour.ToString() + ":0" + minute.ToString() + " " + halfOfDay; // do this is another function
         }
         else
         {
-            currentTime = hour.ToString() + ":" + minute.ToString() + " " + halfOfDay;
+            currentTime = currentWeekday + " " + hour.ToString() + ":" + minute.ToString() + " " + halfOfDay;
         }
-        
-        Debug.Log(currentTime);
+
+        return currentTime;
     }
 
-    void IncrementHour()
+    int IncrementHour()
     {
-        if (hour != 12)
+        if (minute == 60)
         {
-            hour += 1;
+            if (hour == 11 )
+            {
+                hour = 12;
+                IncrementHalfOfDay();
+            }
+            else if (hour == 12)
+            {
+                hour = 1;
+            }
+            else
+            {
+                hour += 1;
+            }
+            minute = 0;
         }
-        else
-        {
-            hour = 1;
-            IncrementHalfOfDay();
-        }
-        atEndOfMinute = false;
-    }
-
-    void IncrementMinute()
-    {
-        minute = ((int)(Time.time)) % 60; // need to reset to 0
-
-        if (minute == 59)
-        {
-            atEndOfMinute = true;
-        }
+    return hour;
     }
 
     void IncrementHalfOfDay()
     {
         if (halfOfDay == morning)
         {
-            halfOfDay = afternoon;
+            halfOfDay = night;
         }
         else
         {
             halfOfDay = morning;
+            IncrementDay();
+        }
+    }
+
+    void IncrementDay()
+    {
+        if (currentWeekdayIndex == 6)
+        {
+            currentWeekday = weekdays[0];
+        }
+        else
+        {
+            currentWeekday = weekdays[currentWeekdayIndex + 1];
         }
     }
 }

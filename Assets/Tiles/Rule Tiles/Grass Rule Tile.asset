@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Grass Rule Tile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: 87d07b2c046c5ac498ded9f8fc89d81f, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300000, guid: d941d9a3923c9f8459ba54a9174e72dc, type: 3}
+  m_DefaultGameObject: {fileID: 2518965372521591745, guid: 56fb86b2d90af50439dd0cffc0262ab5, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 21300000, guid: 87d07b2c046c5ac498ded9f8fc89d81f, type: 3}
-    - {fileID: 21300000, guid: 320b985f55218194d9e2f29a0b27a6d0, type: 3}
-    - {fileID: 21300000, guid: 697654696b39e9441b9bd6c0ff62707f, type: 3}
-    - {fileID: 21300000, guid: 697654696b39e9441b9bd6c0ff62707f, type: 3}
-    m_GameObject: {fileID: 8356146745893075278, guid: 3e6436bc32afcc048ac01b8dd3923096, type: 3}
+    - {fileID: 21300000, guid: d941d9a3923c9f8459ba54a9174e72dc, type: 3}
+    - {fileID: 21300000, guid: 91daa2d2081b55e45a0872b36e0e1fba, type: 3}
+    - {fileID: 21300000, guid: 00f9a874ba92e8c419114f25979f5f19, type: 3}
+    - {fileID: 21300000, guid: 00f9a874ba92e8c419114f25979f5f19, type: 3}
+    m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5

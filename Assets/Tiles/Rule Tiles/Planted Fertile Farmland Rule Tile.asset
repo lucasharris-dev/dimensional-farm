@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Fertile Planted Farmland Rule Tile
+  m_Name: Planted Fertile Farmland Rule Tile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: e48acdf26d200b048995ea2acb867361, type: 3}
   m_DefaultGameObject: {fileID: 5371281261634733132, guid: eca992d97890f8e4fab40dfc212a0d02, type: 3}

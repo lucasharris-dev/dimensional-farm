@@ -8,27 +8,32 @@ TagManager:
   - SeedPouch
   - WaterCan
   - CropBag
+  - Fence
   - Grass
   - Farmland
+  - FertileFarmland
+  - PlantedFarmland
+  - PlantedFertileFarmland
   - PlantedSeeds
   - GrownCrops
-  - PlantedFarmland
-  - FertileFarmland
-  - FertilePlantedFarmland
-  - Fence
   - Chef
   - Blacksmith
   - Traveler
+  - Seed
+  - Crop
+  - Mineral
+  - Items
+  - Time
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - Farmland
+  - Fence
   - 
   - 
   - 
@@ -58,6 +63,15 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 815053151
+    locked: 0
+  - name: Farmland
+    uniqueID: 2124778071
+    locked: 0
+  - name: Fence
+    uniqueID: 1854111297
+    locked: 0
+  - name: Held Items
+    uniqueID: 3910750123
     locked: 0
   - name: Characters
     uniqueID: 2757920229

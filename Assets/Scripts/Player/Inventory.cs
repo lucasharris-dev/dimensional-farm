@@ -7,6 +7,11 @@ public class Inventory : MonoBehaviour
 {
     int playerMoney = 0;
     int lifetimeProfit = 0;
+    string seedTag = "Seed";
+    string grownCropsTag = "GrownCrops";
+    string mineralTag = "Mineral";
+    List<GameObject> playerSellableInventory = new List<GameObject>();
+    List<GameObject> playerSeedInventory = new List<GameObject>();
 
     Keyboard keyboard;
     GameObject equippedItem;
@@ -23,6 +28,11 @@ public class Inventory : MonoBehaviour
         SelectItem();
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        PickUpItem(other.gameObject);
+    }
+
     void SelectItem()
     {
         if (keyboard == null)
@@ -30,7 +40,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        if (keyboard.digit1Key.isPressed)
+        if (keyboard.upArrowKey.isPressed)
         {
             if (equippedItem == GameObject.FindGameObjectWithTag("FarmingTool"))
             {
@@ -40,7 +50,7 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = GameObject.FindGameObjectWithTag("FarmingTool");
         }
-        if (keyboard.digit2Key.isPressed)
+        if (keyboard.downArrowKey.isPressed)
         {
             if (equippedItem == GameObject.FindGameObjectWithTag("SeedPouch"))
             {
@@ -50,7 +60,7 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = GameObject.FindGameObjectWithTag("SeedPouch");
         }
-        if (keyboard.digit3Key.isPressed)
+        if (keyboard.rightArrowKey.isPressed)
         {
             if (equippedItem == GameObject.FindGameObjectWithTag("WaterCan"))
             {
@@ -60,7 +70,7 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = GameObject.FindGameObjectWithTag("WaterCan");
         }
-        if (keyboard.digit4Key.isPressed)
+        if (keyboard.leftArrowKey.isPressed)
         {
             if (equippedItem == GameObject.FindGameObjectWithTag("CropBag"))
             {
@@ -73,9 +83,39 @@ public class Inventory : MonoBehaviour
         equippedItem.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    public void PickUpItem(GameObject item)
+    {
+        if (item.tag == seedTag)
+        {
+            playerSeedInventory.Add(item);
+        }
+        else if (item.tag == grownCropsTag || item.tag == mineralTag)
+        {
+            playerSellableInventory.Add(item);
+        }
+        for (int i = 0; i < playerSeedInventory.Count; i++)
+        {
+            Debug.Log("seed inventory: " + playerSeedInventory[i]);
+        }
+        for (int i = 0; i < playerSellableInventory.Count; i++)
+        {
+            Debug.Log("inventory: " + playerSellableInventory[i]);
+        }
+    }
+
     public GameObject GetEquippedItem()
     {
         return equippedItem;
+    }
+
+    public List<GameObject> GetPlayerSellableInventory()
+    {
+        return playerSellableInventory;
+    }
+
+    public List<GameObject> GetPlayerSeedInventory()
+    {
+        return playerSeedInventory;
     }
 
     public void SetPlayerMoney(int amount)

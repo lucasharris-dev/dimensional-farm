@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2172357487037131926}
   - component: {fileID: 6638992990398260235}
   - component: {fileID: 1942779807241984676}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Farmland
   m_TagString: Farmland
   m_Icon: {fileID: 0}
@@ -71,10 +71,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2124778071
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 56c70589a1337344287cc595251233ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 436d685c4b81644419c557fa604d7583, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
