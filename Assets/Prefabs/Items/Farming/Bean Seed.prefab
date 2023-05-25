@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5690891620789618337}
   - component: {fileID: 5690891620789618399}
   - component: {fileID: 5690891620789618398}
+  - component: {fileID: -844693644103575319}
   m_Layer: 0
   m_Name: Bean Seed
   m_TagString: Seed
@@ -111,3 +112,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-844693644103575319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5690891622572047347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21399e74db90b04d864f2a24cc52a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisCrop: {fileID: 4438784146330441297, guid: 8f34f530a9e54474486514d87f8a7485, type: 3}
+  manaFruit: {fileID: 3385468537214300134, guid: 98ebe76b2cc549c41b82cfe5928b5ed7, type: 3}
+  growthTime: 0

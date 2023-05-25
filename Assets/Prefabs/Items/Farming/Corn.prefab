@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3857207617937331219}
   - component: {fileID: 2977922932089194780}
   - component: {fileID: 1066170725522744358}
+  - component: {fileID: -6910189790556383842}
   m_Layer: 0
   m_Name: Corn
   m_TagString: Crop
@@ -111,3 +112,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-6910189790556383842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520542161719277161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d507f5cc5cf194fbe49aed2b7cc67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSellPrice: 3

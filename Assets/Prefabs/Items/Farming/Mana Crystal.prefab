@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 7425260988372863774}
   - component: {fileID: 820482242847703843}
   - component: {fileID: 926169090782108767}
+  - component: {fileID: 4566722825157153477}
+  - component: {fileID: 1711609650270519591}
   m_Layer: 0
   m_Name: Mana Crystal
-  m_TagString: Seed
+  m_TagString: Mineral
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +113,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4566722825157153477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279687761144771157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d507f5cc5cf194fbe49aed2b7cc67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBuyPrice: 150
+  playerSellPrice: 100
+--- !u!114 &1711609650270519591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279687761144771157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21399e74db90b04d864f2a24cc52a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisCrop: {fileID: 3385468537214300134, guid: 98ebe76b2cc549c41b82cfe5928b5ed7, type: 3}
+  manaFruit: {fileID: 3385468537214300134, guid: 98ebe76b2cc549c41b82cfe5928b5ed7, type: 3}
+  growthTime: 0

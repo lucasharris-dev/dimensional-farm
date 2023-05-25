@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6764428775363966158}
   - component: {fileID: 767535383287106102}
   - component: {fileID: 883652345061343714}
+  - component: {fileID: -7279606139571207499}
+  - component: {fileID: -3939301335349542069}
   m_Layer: 0
   m_Name: Corn Seed
   m_TagString: Seed
@@ -111,3 +113,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7279606139571207499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781965787854304467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d507f5cc5cf194fbe49aed2b7cc67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBuyPrice: 3
+  playerSellPrice: 1
+--- !u!114 &-3939301335349542069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781965787854304467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21399e74db90b04d864f2a24cc52a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisCrop: {fileID: 520542161719277161, guid: d7c7deabf330fc24ea9a0cb1430290c9, type: 3}
+  manaFruit: {fileID: 3385468537214300134, guid: 98ebe76b2cc549c41b82cfe5928b5ed7, type: 3}
+  growthTime: 0

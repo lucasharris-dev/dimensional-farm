@@ -12,12 +12,9 @@ GameObject:
   - component: {fileID: 2560821869996781163}
   - component: {fileID: 2560821869996781160}
   - component: {fileID: 2560821869996781161}
-  - component: {fileID: 1478212711}
-  - component: {fileID: 547855147}
-  - component: {fileID: 2011324175}
   m_Layer: 0
   m_Name: Merchant
-  m_TagString: Untagged
+  m_TagString: Traveler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.57220507, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,41 +122,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21aef976b47a25c40b21d7b318b4760d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1478212711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2560821869996781142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f7e41b09a05ce489d005de9263e62f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &547855147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2560821869996781142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a11e8424859143459c2177f32437b1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2011324175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2560821869996781142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c600c4cc61e7a94ba3a76bbeaf38f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
