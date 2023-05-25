@@ -13,11 +13,13 @@ public class PlayerMovement : MonoBehaviour
     Keyboard keyboard;
     Rigidbody2D myRigidbody;
     Vector2 moveInput;
+    Farming farming;
 
     void Awake()
     {
         keyboard = Keyboard.current;
         myRigidbody = GetComponent<Rigidbody2D>();
+        farming = GetComponent<Farming>();
         moveSpeed = walkSpeed;
     }
 
@@ -33,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        if (farming.GetPickingSeed())
+        {
+            return;
+        }
+        
         if (Sprint())
         {
             moveSpeed = sprintSpeed;

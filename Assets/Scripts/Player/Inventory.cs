@@ -5,6 +5,22 @@ using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] GameObject farmingTool;
+    [SerializeField] GameObject seedPouch;
+    [SerializeField] GameObject waterCan;
+    [SerializeField] GameObject cropBag;
+
+    [SerializeField] GameObject beanSeed;
+    [SerializeField] GameObject bean;
+    [SerializeField] GameObject wheatSeed;
+    [SerializeField] GameObject wheat;
+    [SerializeField] GameObject cornSeed;
+    [SerializeField] GameObject corn;
+    [SerializeField] GameObject carrotSeed;
+    [SerializeField] GameObject carrot;
+    [SerializeField] GameObject manaCrystal;
+    [SerializeField] GameObject manaFruit;
+
     int playerMoney = 0;
     int lifetimeProfit = 0;
     string seedTag = "Seed";
@@ -14,12 +30,17 @@ public class Inventory : MonoBehaviour
     List<GameObject> playerSeedInventory = new List<GameObject>();
 
     Keyboard keyboard;
+    Farming farming;
+    EquippedItems equippedItemsScript;
     GameObject equippedItem;
+    GameObject equippedSeed;
 
     void Awake()
     {
+        farming = GetComponent<Farming>();
         keyboard = Keyboard.current;
-        equippedItem = GameObject.FindGameObjectWithTag("FarmingTool");
+        equippedItemsScript = GetComponentInChildren<EquippedItems>();
+        equippedItem = farmingTool;
         equippedItem.GetComponent<SpriteRenderer>().enabled = true;
     }
 
@@ -35,58 +56,118 @@ public class Inventory : MonoBehaviour
 
     void SelectItem()
     {
-        if (keyboard == null)
+        if (keyboard == null || farming.GetPickingSeed())
         {
             return;
         }
 
         if (keyboard.upArrowKey.isPressed)
         {
-            if (equippedItem == GameObject.FindGameObjectWithTag("FarmingTool"))
+            if (equippedItem == farmingTool)
             {
                 return;
             }
 
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
-            equippedItem = GameObject.FindGameObjectWithTag("FarmingTool");
+            equippedItem = farmingTool;
+            equippedItemsScript.ShowEquippedSeed(false);
         }
         if (keyboard.downArrowKey.isPressed)
         {
-            if (equippedItem == GameObject.FindGameObjectWithTag("SeedPouch"))
+            if (equippedItem == seedPouch)
             {
                 return;
             }
 
+            if (playerSeedInventory.Count == 0)
+            {
+                GiveOneSeed();
+            }
+
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
-            equippedItem = GameObject.FindGameObjectWithTag("SeedPouch");
+            equippedItem = seedPouch;
+            equippedItemsScript.ShowEquippedSeed(true);
         }
         if (keyboard.rightArrowKey.isPressed)
         {
-            if (equippedItem == GameObject.FindGameObjectWithTag("WaterCan"))
+            if (equippedItem == waterCan)
             {
                 return;
             }
 
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
-            equippedItem = GameObject.FindGameObjectWithTag("WaterCan");
+            equippedItem = waterCan;
+            equippedItemsScript.ShowEquippedSeed(false);
         }
         if (keyboard.leftArrowKey.isPressed)
         {
-            if (equippedItem == GameObject.FindGameObjectWithTag("CropBag"))
+            if (equippedItem == cropBag)
             {
                 return;
             }
 
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
-            equippedItem = GameObject.FindGameObjectWithTag("CropBag");
+            equippedItem = cropBag;
+            equippedItemsScript.ShowEquippedSeed(false);
         }
         equippedItem.GetComponent<SpriteRenderer>().enabled = true;
+        equippedItemsScript.UpdateEquippedItemUI();
+    }
+
+    void SelectSeed()
+    {
+        if (keyboard == null)
+        {
+            return;
+        }
+
+        farming.SetPickingSeed(true);
+        
+        if (keyboard.escapeKey.isPressed)
+        {
+            farming.SetPickingSeed(false);
+            return;
+        }
+
+        if (equippedItem == seedPouch)
+        {
+            // add "and player has a seed" for each of these, except beans
+            if (keyboard.digit1Key.isPressed)
+            {
+                SetEquippedSeed(beanSeed);
+                farming.SetPickingSeed(false);
+            }
+            else if (keyboard.digit2Key.isPressed)
+            {
+                SetEquippedSeed(wheatSeed);
+                farming.SetPickingSeed(false);
+            }
+            else if (keyboard.digit3Key.isPressed)
+            {
+                SetEquippedSeed(cornSeed);
+                farming.SetPickingSeed(false);
+            }
+            else if (keyboard.digit4Key.isPressed)
+            {
+                SetEquippedSeed(carrotSeed);
+                farming.SetPickingSeed(false);
+            }
+            else if (keyboard.digit5Key.isPressed)
+            {
+                SetEquippedSeed(manaCrystal);
+                farming.SetPickingSeed(false);
+            }
+        }
     }
 
     public void PickUpItem(GameObject item)
     {
         if (item.tag == seedTag)
         {
+            if (playerSeedInventory.Count == 0) // list.Count gets length
+            {
+                SetEquippedSeed(item);
+            }
             playerSeedInventory.Add(item);
         }
         else if (item.tag == grownCropsTag || item.tag == mineralTag)
@@ -103,9 +184,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void GiveOneSeed()
+    {
+        playerSeedInventory.Add(beanSeed);
+        SetEquippedSeed(beanSeed);
+    }
+
     public GameObject GetEquippedItem()
     {
         return equippedItem;
+    }
+
+    public GameObject GetEquippedSeed()
+    {
+        return equippedSeed;
     }
 
     public List<GameObject> GetPlayerSellableInventory()
@@ -122,5 +214,11 @@ public class Inventory : MonoBehaviour
     {
         playerMoney += amount;
         lifetimeProfit += playerMoney;
+    }
+
+    public void SetEquippedSeed(GameObject seed)
+    {
+        equippedSeed = seed;
+        equippedItemsScript.UpdateEquippedSeedUI();
     }
 }

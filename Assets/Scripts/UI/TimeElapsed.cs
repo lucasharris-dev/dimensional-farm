@@ -10,7 +10,6 @@ public class TimeElapsed : MonoBehaviour
     string[] weekdays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     string morning = "AM"; // maybe rename
     string night = "PM";
-    string timeTag = "Time";
 
     int currentWeekdayIndex;
     string currentWeekday;

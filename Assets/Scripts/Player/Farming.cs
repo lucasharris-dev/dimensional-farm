@@ -7,11 +7,14 @@ using UnityEngine.Tilemaps;
 public class Farming : MonoBehaviour
 {
     [SerializeField] Tilemap farmTilemap;
+    [SerializeField] Tilemap cropTilemap;
     [SerializeField] RuleTile grassRuleTile;
     [SerializeField] RuleTile farmlandRuleTile;
     [SerializeField] RuleTile fertileFarmlandRuleTile;
     [SerializeField] RuleTile plantedFarmlandRuleTile;
     [SerializeField] RuleTile plantedFertileFarmlandRuleTile;
+    [SerializeField] RuleTile manaCrystalRuleTile;
+    [SerializeField] GameObject manaCrystal;
 
     const string grassTag = "Grass";
     const string farmlandTag = "Farmland";
@@ -19,6 +22,7 @@ public class Farming : MonoBehaviour
     const string plantedFarmlandTag = "PlantedFarmland";
     const string plantedFertileFarmlandTag = "PlantedFertileFarmland";
     const string plantedSeedsTag = "PlantedSeeds";
+    const string cropTag = "Crop";
     const string grownCropsTag = "GrownCrops";
 
     const string farmingToolTag = "FarmingTool";
@@ -26,13 +30,12 @@ public class Farming : MonoBehaviour
     const string waterCanTag = "WaterCan";
     const string cropBagTag = "CropBag"; // might remove this
 
-    bool useItem = false;
-
-    //bool hasSeeds = true; set equal to a bool (hasSeeds = (numSeeds > 0) ), will be in inventory probably
+    bool pickingSeed = false;
 
     Keyboard keyboard;
     Mouse mouse;
     Inventory inventory;
+    EquippedItems equippedItemsScript;
     GameObject collidedObject;
 
     void Awake()
@@ -40,6 +43,7 @@ public class Farming : MonoBehaviour
         keyboard = Keyboard.current;
         mouse = Mouse.current;
         inventory = GetComponent<Inventory>();
+        equippedItemsScript = GetComponentInChildren<EquippedItems>();
     }
 
     void Update()
@@ -54,7 +58,7 @@ public class Farming : MonoBehaviour
 
     void Interact()
     {
-        if (mouse == null || collidedObject == null || useItem == true)
+        if (mouse == null || collidedObject == null || pickingSeed == true)
         {
             return;
         }
@@ -67,7 +71,7 @@ public class Farming : MonoBehaviour
                     TillGround();
                     break;
                 case seedPouchTag:
-                    PickSeed();
+                    PlantSeed();
                     break;
                 case waterCanTag:
                     WaterFarmland();
@@ -79,44 +83,20 @@ public class Farming : MonoBehaviour
         }
     }
 
-    void PickSeed()
+    Vector3Int GetCollidedPosition()
     {
-        if (keyboard == null || useItem == false)
-        {
-            return;
-        }
-
-        if (keyboard.digit1Key.isPressed)
-        {
-            PlantSeed("beans");
-        }
-        if (keyboard.digit2Key.isPressed)
-        {
-            PlantSeed("wheat");
-        }
-        if (keyboard.digit3Key.isPressed)
-        {
-            PlantSeed("corn");
-        }
-        if (keyboard.digit4Key.isPressed)
-        {
-            PlantSeed("carrots");
-        }
-        if (keyboard.digit5Key.isPressed)
-        {
-            PlantSeed("mana crystal");
-        }
-        if (keyboard.escapeKey.isPressed)
-        {
-            // exit menu to choose a seed
-        }
+        Vector3 collidedPosition = collidedObject.transform.position;
+        return Vector3Int.FloorToInt(collidedPosition);
     }
 
     void ReplaceTile(RuleTile newRuleTile)
     {
-        Vector3 collidedPosition = collidedObject.transform.position;
-        Vector3Int tilePosition = Vector3Int.FloorToInt(collidedPosition);
-        farmTilemap.SetTile(tilePosition, newRuleTile);
+        farmTilemap.SetTile(GetCollidedPosition(), newRuleTile);
+    }
+
+    void SpawnCropTile(RuleTile newRuleTile)
+    {
+        cropTilemap.SetTile(GetCollidedPosition(), newRuleTile);
     }
 
     void TillGround()
@@ -129,18 +109,32 @@ public class Farming : MonoBehaviour
         }
     }
 
-    void PlantSeed(string seedName) // change to game object once set up
+    void PlantSeed() // needs to be edited so mana crystals can only be planted 
     {
+        if (inventory.GetPlayerSeedInventory().Count == 0)
+        {
+            inventory.GiveOneSeed();
+        }
+        
         if (collidedObject.tag == farmlandTag)
         {
             ReplaceTile(plantedFarmlandRuleTile);
-            Debug.Log("plant " + seedName);
+
+            Debug.Log("plant " + inventory.GetEquippedSeed().name);
         }
         else if (collidedObject.tag == fertileFarmlandTag)
         {
             ReplaceTile(plantedFertileFarmlandRuleTile);
-            Debug.Log("plant " + seedName);
+            Debug.Log("plant " + inventory.GetEquippedSeed().name);
         }
+        else if (collidedObject.tag == cropTag)
+        {
+            if (inventory.GetEquippedSeed() == manaCrystal)
+            {
+                SpawnCropTile(manaCrystalRuleTile);
+            }
+        }
+        // remove 1 of a seed
     }
 
     void WaterFarmland()
@@ -169,5 +163,15 @@ public class Farming : MonoBehaviour
             
             Debug.Log("harvest crop");
         }
+    }
+
+    public bool GetPickingSeed()
+    {
+        return pickingSeed;
+    }
+
+    public void SetPickingSeed(bool newValue)
+    {
+        pickingSeed = newValue;
     }
 }
