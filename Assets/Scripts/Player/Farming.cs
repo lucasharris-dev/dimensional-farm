@@ -6,15 +6,21 @@ using UnityEngine.Tilemaps;
 
 public class Farming : MonoBehaviour
 {
-    [SerializeField] Tilemap farmTilemap;
     [SerializeField] Tilemap cropTilemap;
+    [SerializeField] Tilemap effectTilemap;
+    [SerializeField] Tilemap farmTilemap;
     [SerializeField] RuleTile grassRuleTile;
     [SerializeField] RuleTile farmlandRuleTile;
     [SerializeField] RuleTile fertileFarmlandRuleTile;
     [SerializeField] RuleTile plantedFarmlandRuleTile;
     [SerializeField] RuleTile plantedFertileFarmlandRuleTile;
     [SerializeField] RuleTile manaCrystalRuleTile;
+    [SerializeField] RuleTile manaCrystalEffect;
     [SerializeField] GameObject manaCrystal;
+    [SerializeField] GameObject beanSeed;
+    [SerializeField] GameObject wheatSeed;
+    [SerializeField] GameObject cornSeed;
+    [SerializeField] GameObject carrotSeed;
 
     const string grassTag = "Grass";
     const string farmlandTag = "Farmland";
@@ -22,6 +28,7 @@ public class Farming : MonoBehaviour
     const string plantedFarmlandTag = "PlantedFarmland";
     const string plantedFertileFarmlandTag = "PlantedFertileFarmland";
     const string plantedSeedsTag = "PlantedSeeds";
+    const string seedTag = "Seed";
     const string cropTag = "Crop";
     const string grownCropsTag = "GrownCrops";
 
@@ -97,6 +104,8 @@ public class Farming : MonoBehaviour
     void SpawnCropTile(RuleTile newRuleTile)
     {
         cropTilemap.SetTile(GetCollidedPosition(), newRuleTile);
+        // if (newRuleTile == manaCrystal)
+            // effectTilemap.SetTile(GetCollidedPosition(), manaCrystalEffect)
     }
 
     void TillGround()
@@ -109,32 +118,56 @@ public class Farming : MonoBehaviour
         }
     }
 
-    void PlantSeed() // needs to be edited so mana crystals can only be planted 
+    void PlantSeed() // needs to be edited so mana crystals can only be planted on planted seeds
     {
         if (inventory.GetPlayerSeedInventory().Count == 0)
         {
             inventory.GiveOneSeed();
         }
-        
-        if (collidedObject.tag == farmlandTag)
-        {
-            ReplaceTile(plantedFarmlandRuleTile);
 
-            Debug.Log("plant " + inventory.GetEquippedSeed().name);
-        }
-        else if (collidedObject.tag == fertileFarmlandTag)
+        if (collidedObject.tag == seedTag && (inventory.GetEquippedSeed() == manaCrystal))
         {
-            ReplaceTile(plantedFertileFarmlandRuleTile);
-            Debug.Log("plant " + inventory.GetEquippedSeed().name);
-        }
-        else if (collidedObject.tag == cropTag)
-        {
-            if (inventory.GetEquippedSeed() == manaCrystal)
+            if (collidedObject == carrotSeed)
             {
-                SpawnCropTile(manaCrystalRuleTile);
+                collidedObject.GetComponent<SeedInformation>().SetManaFruitQuality(4);
+            }
+            else if (collidedObject == cornSeed)
+            {
+                collidedObject.GetComponent<SeedInformation>().SetManaFruitQuality(3);
+            }
+            else if (collidedObject == wheatSeed)
+            {
+                collidedObject.GetComponent<SeedInformation>().SetManaFruitQuality(2);
+            }
+            else if (collidedObject == beanSeed)
+            {
+                collidedObject.GetComponent<SeedInformation>().SetManaFruitQuality(1);
             }
         }
-        // remove 1 of a seed
+        else
+        {
+            if (collidedObject.tag == farmlandTag)
+            {
+                ReplaceTile(plantedFarmlandRuleTile);
+
+                Debug.Log("plant " + inventory.GetEquippedSeed().name);
+                // spawn crop tile
+            }
+            else if (collidedObject.tag == fertileFarmlandTag)
+            {
+                ReplaceTile(plantedFertileFarmlandRuleTile);
+                Debug.Log("plant " + inventory.GetEquippedSeed().name);
+                // spawn crop tile
+            }
+            else if (collidedObject.tag == cropTag)
+            {
+                if (inventory.GetEquippedSeed() == manaCrystal)
+                {
+                    SpawnCropTile(manaCrystalRuleTile);
+                }
+            }
+            inventory.RemoveOneSeed(inventory.GetEquippedSeed());
+        }
     }
 
     void WaterFarmland()
