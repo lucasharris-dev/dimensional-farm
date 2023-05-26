@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BlacksmithInteractions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject manaCrystal;
+    GameObject[] blacksmithWares;
+
+    void Awake()
     {
-        
+        blacksmithWares = new GameObject[] {manaCrystal};
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject[] GetBlacksmithWares()
     {
-        
+        return blacksmithWares;
     }
 }

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class TravelerInteractions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject beanSeed;
+    [SerializeField] GameObject wheatSeed;
+    [SerializeField] GameObject cornSeed;
+    [SerializeField] GameObject carrotSeed;
+
+    GameObject[] travelerWares;
+
+
+    void Awake()
     {
-        
+        travelerWares = new GameObject[] {beanSeed, wheatSeed, cornSeed, carrotSeed};
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject[] GetTravelerWares()
     {
-        
+        return travelerWares;
     }
 }
