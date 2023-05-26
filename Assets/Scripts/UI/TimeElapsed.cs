@@ -117,11 +117,12 @@ public class TimeElapsed : MonoBehaviour
     {
         if (currentWeekdayIndex == 6)
         {
-            currentWeekday = weekdays[0];
+            currentWeekdayIndex = 0;
         }
         else
         {
-            currentWeekday = weekdays[currentWeekdayIndex + 1];
+            currentWeekdayIndex += 1;
         }
+        currentWeekday = weekdays[currentWeekdayIndex];
     }
 }

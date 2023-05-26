@@ -14,25 +14,21 @@ public class CharacterInteraction : MonoBehaviour
     bool canSell = true;
 
     Keyboard keyboard;
-    Inventory inventory;
+    PlayerGold playerGold;
     MerchantInteractions merchant;
     ChefInteractions chef;
     BlacksmithInteractions blacksmith;
     TravelerInteractions traveler;
+    Inventory inventory;
+
 
     void Awake()
     {
         keyboard = Keyboard.current;
+        playerGold = GetComponent<PlayerGold>();
         inventory = GetComponent<Inventory>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Interact();
@@ -74,6 +70,14 @@ public class CharacterInteraction : MonoBehaviour
         {
             isNextToChef = false;
         }
+        if (other.gameObject.tag == blacksmithTag)
+        {
+            isNextToBlacksmith = false;
+        }
+        if (other.gameObject.tag == travelerTag)
+        {
+            isNextToTraveler = false;
+        }
     }
 
     void Interact()
@@ -98,18 +102,14 @@ public class CharacterInteraction : MonoBehaviour
         }
     }
 
-    void SellItem(string itemName, int itemCount)
+    void SellItem(string itemName, int itemCount) // change to give the item's game object
     {
-        int profit = 0;
-        for (int i = 0; i < itemCount; i++)
-        {
-            profit += chef.BuyFromPlayer(itemName);
-        }
-        inventory.SetPlayerMoney(profit); // temp for testing
+        int profit = chef.BuyFromPlayer(itemName, itemCount);
+        playerGold.SetPlayerGold(profit);
     }
 
-    void BuyItem(string itemName, int itemCount)
+    void BuyItem(string itemName, int itemCount) // change to give the item's gameobject
     {
-        merchant.SellToPlayer(itemName);
+        merchant.SellToPlayer(itemName, itemCount);
     }
 }

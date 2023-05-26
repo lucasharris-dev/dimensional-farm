@@ -21,8 +21,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject manaCrystal;
     [SerializeField] GameObject manaFruit;
 
-    int playerMoney = 0;
-    int lifetimeProfit = 0;
     string seedTag = "Seed";
     string grownCropsTag = "GrownCrops";
     string mineralTag = "Mineral";
@@ -35,10 +33,12 @@ public class Inventory : MonoBehaviour
     GameObject equippedItem;
     GameObject equippedSeed;
 
+
     void Awake()
     {
-        farming = GetComponent<Farming>();
         keyboard = Keyboard.current;
+
+        farming = GetComponent<Farming>();
         equippedItemsScript = GetComponentInChildren<EquippedItems>();
         equippedItem = farmingTool;
         equippedItem.GetComponent<SpriteRenderer>().enabled = true;
@@ -76,6 +76,7 @@ public class Inventory : MonoBehaviour
         {
             if (equippedItem == seedPouch)
             {
+                SelectSeed();
                 return;
             }
 
@@ -190,6 +191,12 @@ public class Inventory : MonoBehaviour
         SetEquippedSeed(beanSeed);
     }
 
+    public void RemoveOneSeed(GameObject seed)
+    {
+        Debug.Log("remove " + seed.name);
+        // get the seed, and decrease the seed amount by one
+    }
+
     public GameObject GetEquippedItem()
     {
         return equippedItem;
@@ -208,12 +215,6 @@ public class Inventory : MonoBehaviour
     public List<GameObject> GetPlayerSeedInventory()
     {
         return playerSeedInventory;
-    }
-
-    public void SetPlayerMoney(int amount)
-    {
-        playerMoney += amount;
-        lifetimeProfit += playerMoney;
     }
 
     public void SetEquippedSeed(GameObject seed)

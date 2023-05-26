@@ -24,6 +24,7 @@ TagManager:
   - Mineral
   - Items
   - Time
+  - ManaFruit
   layers:
   - Default
   - TransparentFX
@@ -34,8 +35,8 @@ TagManager:
   - Ground
   - Farmland
   - Fence
-  - 
-  - 
+  - Effect
+  - Crop
   - 
   - 
   - 
@@ -69,6 +70,12 @@ TagManager:
     locked: 0
   - name: Fence
     uniqueID: 1854111297
+    locked: 0
+  - name: Effects
+    uniqueID: 189543153
+    locked: 0
+  - name: Crops
+    uniqueID: 2957384907
     locked: 0
   - name: Held Items
     uniqueID: 3910750123
