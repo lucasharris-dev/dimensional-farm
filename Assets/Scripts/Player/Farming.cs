@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class Farming : MonoBehaviour
 {
+    [SerializeField] GameObject items;
+
     [SerializeField] Tilemap cropTilemap;
     [SerializeField] Tilemap effectTilemap;
     [SerializeField] Tilemap farmTilemap;
@@ -44,6 +46,7 @@ public class Farming : MonoBehaviour
     Inventory inventory;
     EquippedItems equippedItemsScript;
     GameObject collidedObject;
+
 
     void Awake()
     {

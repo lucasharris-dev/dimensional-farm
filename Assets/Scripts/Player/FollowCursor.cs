@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class FollowCursor : MonoBehaviour
 {
+    [SerializeField] GameObject items;
+
     string itemsTag = "Items";
 
     Mouse mouse;
     Camera mainCamera;
-    GameObject items;
+
 
     void Awake()
     {
@@ -32,9 +34,8 @@ public class FollowCursor : MonoBehaviour
         {
             return;
         }
-        Vector3 mousePosition = new Vector3(mouse.position.value.x, mouse.position.value.y, -10f);
-        Vector3 screenPosition = mainCamera.WorldToScreenPoint(mousePosition);
-        items.transform.position = screenPosition;
-        Debug.Log(screenPosition);
+        Vector3 mousePosition = new Vector3(mouse.position.x.ReadValue(), mouse.position.y.ReadValue(), 10);
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
+        items.transform.position = worldPosition;
     }
 }

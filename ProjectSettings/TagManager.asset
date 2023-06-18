@@ -77,9 +77,9 @@ TagManager:
   - name: Crops
     uniqueID: 2957384907
     locked: 0
-  - name: Held Items
-    uniqueID: 3910750123
-    locked: 0
   - name: Characters
     uniqueID: 2757920229
+    locked: 0
+  - name: Held Items
+    uniqueID: 3910750123
     locked: 0
