@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class Farming : MonoBehaviour
 {
-    [SerializeField] GameObject items;
-
     [SerializeField] Tilemap cropTilemap;
     [SerializeField] Tilemap effectTilemap;
     [SerializeField] Tilemap farmTilemap;
@@ -52,7 +50,7 @@ public class Farming : MonoBehaviour
     {
         keyboard = Keyboard.current;
         mouse = Mouse.current;
-        inventory = GetComponent<Inventory>();
+        inventory = GetComponentInParent<Inventory>();
         equippedItemsScript = GetComponentInChildren<EquippedItems>();
     }
 

@@ -1232,6 +1232,71 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1179146273812028651, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
   m_PrefabInstance: {fileID: 7315549302692231585}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1247381859
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247381858}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1}
+  m_EdgeRadius: 0
+--- !u!114 &1247381861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247381858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: effc18e72ac39294f8dc319ab2054ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropTilemap: {fileID: 693878122}
+  effectTilemap: {fileID: 1283268407}
+  farmTilemap: {fileID: 290417622}
+  grassRuleTile: {fileID: 11400000, guid: 4d10fad5c3543674aac60343a84950eb, type: 2}
+  farmlandRuleTile: {fileID: 11400000, guid: 99fa725bf7afb064f9b9c0978ba116f3, type: 2}
+  fertileFarmlandRuleTile: {fileID: 11400000, guid: b22026ae8fed9f947b80a623d44ce304, type: 2}
+  plantedFarmlandRuleTile: {fileID: 11400000, guid: 53cedcad96a57b34aa7cf8cb13cd617d, type: 2}
+  plantedFertileFarmlandRuleTile: {fileID: 11400000, guid: e252a082619c53e40afc0ab6fb83832e, type: 2}
+  manaCrystalRuleTile: {fileID: 11400000, guid: e5a1391f2911e604da3ca4562774b118, type: 2}
+  manaCrystalEffect: {fileID: 0}
+  manaCrystal: {fileID: 3279687761144771157, guid: b106d102e4886b04b8b7b440446a4522, type: 3}
+  beanSeed: {fileID: 5690891622572047347, guid: eef06bb7daa1ab2489f50ef635957378, type: 3}
+  wheatSeed: {fileID: 993721608968972698, guid: b08e8e81025d87c4a9cae4a6db201ff6, type: 3}
+  cornSeed: {fileID: 5781965787854304467, guid: 2b8061f2b4574f348959ba9667be78df, type: 3}
+  carrotSeed: {fileID: 6606190305488906247, guid: a9bb20b0e9c51fd4899e3115dda4352e, type: 3}
+--- !u!114 &1247381862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247381858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fa37ed2b0f236409eae08a344a597b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1283268404
 GameObject:
   m_ObjectHideFlags: 0
@@ -6467,6 +6532,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895037763, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7315549301662047178, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6529,6 +6598,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7315549303006202013, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315549303006202081, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
+      propertyPath: items
+      value: 
+      objectReference: {fileID: 1247381858}
+    - target: {fileID: 7315549303006202081, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7315549303006202081, guid: b5009d76e729ac3489ca521ad1dbd2cb, type: 3}

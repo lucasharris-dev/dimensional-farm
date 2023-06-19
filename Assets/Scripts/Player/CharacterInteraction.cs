@@ -26,7 +26,7 @@ public class CharacterInteraction : MonoBehaviour
     {
         keyboard = Keyboard.current;
         playerGold = GetComponent<PlayerGold>();
-        inventory = GetComponent<Inventory>();
+        inventory = GetComponentInParent<Inventory>();
     }
 
     void Update()
