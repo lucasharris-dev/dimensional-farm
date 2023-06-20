@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         keyboard = Keyboard.current;
         myRigidbody = GetComponent<Rigidbody2D>();
-        farming = GetComponent<Farming>();
+        farming = GetComponentInChildren<Farming>();
         moveSpeed = walkSpeed;
     }
 

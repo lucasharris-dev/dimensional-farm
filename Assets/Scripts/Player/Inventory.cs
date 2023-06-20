@@ -38,15 +38,15 @@ public class Inventory : MonoBehaviour
     {
         keyboard = Keyboard.current;
 
-        farming = GetComponent<Farming>();
+        farming = GetComponentInChildren<Farming>();
         equippedItemsScript = GetComponentInChildren<EquippedItems>();
         equippedItem = farmingTool;
-        equippedItem.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     void Update()
     {
         SelectItem();
+        SelectSeed();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -71,23 +71,21 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = farmingTool;
             equippedItemsScript.ShowEquippedSeed(false);
+
+            farming.SetPickingSeed(false);
         }
         if (keyboard.downArrowKey.isPressed)
         {
-            if (equippedItem == seedPouch)
-            {
-                SelectSeed();
-                return;
-            }
+            equippedItem.GetComponent<SpriteRenderer>().enabled = false;
+            equippedItem = seedPouch;
+            equippedItemsScript.ShowEquippedSeed(true);
+
+            farming.SetPickingSeed(true);
 
             if (playerSeedInventory.Count == 0)
             {
                 GiveOneSeed();
             }
-
-            equippedItem.GetComponent<SpriteRenderer>().enabled = false;
-            equippedItem = seedPouch;
-            equippedItemsScript.ShowEquippedSeed(true);
         }
         if (keyboard.rightArrowKey.isPressed)
         {
@@ -99,6 +97,8 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = waterCan;
             equippedItemsScript.ShowEquippedSeed(false);
+
+            farming.SetPickingSeed(false);
         }
         if (keyboard.leftArrowKey.isPressed)
         {
@@ -110,8 +110,10 @@ public class Inventory : MonoBehaviour
             equippedItem.GetComponent<SpriteRenderer>().enabled = false;
             equippedItem = cropBag;
             equippedItemsScript.ShowEquippedSeed(false);
+
+            farming.SetPickingSeed(false);
         }
-        equippedItem.GetComponent<SpriteRenderer>().enabled = true;
+        //equippedItem.GetComponent<SpriteRenderer>().enabled = true;
         equippedItemsScript.UpdateEquippedItemUI();
     }
 
@@ -122,17 +124,15 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        farming.SetPickingSeed(true);
-        
-        if (keyboard.escapeKey.isPressed)
+        // needs to bring up a menu with the player's seed inventory
+        if (equippedItem == seedPouch && farming.GetPickingSeed())
         {
-            farming.SetPickingSeed(false);
-            return;
-        }
+            if (keyboard.escapeKey.isPressed)
+            {
+                farming.SetPickingSeed(false);
+                return;
+            }
 
-        if (equippedItem == seedPouch)
-        {
-            // add "and player has a seed" for each of these, except beans
             if (keyboard.digit1Key.isPressed)
             {
                 SetEquippedSeed(beanSeed);
@@ -194,6 +194,10 @@ public class Inventory : MonoBehaviour
     public void RemoveOneSeed(GameObject seed)
     {
         Debug.Log("remove " + seed.name);
+        // if (seed amount > 0)
+        // {
+                // seed amount -= 1
+        // }
         // get the seed, and decrease the seed amount by one
     }
 

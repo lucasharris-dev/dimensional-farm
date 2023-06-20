@@ -22,9 +22,14 @@ TagManager:
   - Seed
   - Crop
   - Mineral
-  - Items
   - Time
   - ManaFruit
+  - Cursor
+  - Items
+  - DefaultCursor
+  - NPCCursor
+  - Ground
+  - Boundary
   layers:
   - Default
   - TransparentFX
@@ -80,6 +85,6 @@ TagManager:
   - name: Characters
     uniqueID: 2757920229
     locked: 0
-  - name: Held Items
+  - name: Cursors
     uniqueID: 3910750123
     locked: 0

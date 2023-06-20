@@ -157,6 +157,7 @@ public class Farming : MonoBehaviour
             else if (collidedObject.tag == fertileFarmlandTag)
             {
                 ReplaceTile(plantedFertileFarmlandRuleTile);
+                
                 Debug.Log("plant " + inventory.GetEquippedSeed().name);
                 // spawn crop tile
             }
