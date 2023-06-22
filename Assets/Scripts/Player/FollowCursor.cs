@@ -64,10 +64,13 @@ public class FollowCursor : MonoBehaviour
         {
             cursorSprite = 1;
         }
-        // else if ()
-        // {
-        //     // the misc cursor
-        // }
+        else
+        {
+            if (collided != boundaryTag)
+            {
+                cursorSprite = 2;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
