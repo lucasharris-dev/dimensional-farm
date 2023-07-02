@@ -41,7 +41,7 @@ public class Farming : MonoBehaviour
 
     Keyboard keyboard;
     Mouse mouse;
-    Inventory inventory;
+    FarmingInventory farmingInventory;
     EquippedItems equippedItemsScript;
     GameObject collidedObject;
 
@@ -50,7 +50,7 @@ public class Farming : MonoBehaviour
     {
         keyboard = Keyboard.current;
         mouse = Mouse.current;
-        inventory = GetComponentInParent<Inventory>();
+        farmingInventory = GetComponentInParent<FarmingInventory>();
         equippedItemsScript = GetComponentInChildren<EquippedItems>();
     }
 
@@ -73,7 +73,7 @@ public class Farming : MonoBehaviour
 
         if (mouse.leftButton.isPressed)
         {
-            switch (inventory.GetEquippedItem().tag)
+            switch (farmingInventory.GetEquippedItem().tag)
             {
                 case farmingToolTag:
                     TillGround();
@@ -121,12 +121,12 @@ public class Farming : MonoBehaviour
 
     void PlantSeed() // needs to be edited so mana crystals can only be planted on planted seeds
     {
-        if (inventory.GetPlayerSeedInventory().Count == 0)
+        if (farmingInventory.GetPlayerSeedInventory().Count == 0)
         {
-            inventory.GiveOneSeed();
+            farmingInventory.GiveOneSeed();
         }
 
-        if (collidedObject.tag == seedTag && (inventory.GetEquippedSeed() == manaCrystal))
+        if (collidedObject.tag == seedTag && (farmingInventory.GetEquippedSeed() == manaCrystal))
         {
             if (collidedObject == carrotSeed)
             {
@@ -151,24 +151,24 @@ public class Farming : MonoBehaviour
             {
                 ReplaceTile(plantedFarmlandRuleTile);
 
-                Debug.Log("plant " + inventory.GetEquippedSeed().name);
+                Debug.Log("plant " + farmingInventory.GetEquippedSeed().name);
                 // spawn crop tile
             }
             else if (collidedObject.tag == fertileFarmlandTag)
             {
                 ReplaceTile(plantedFertileFarmlandRuleTile);
                 
-                Debug.Log("plant " + inventory.GetEquippedSeed().name);
+                Debug.Log("plant " + farmingInventory.GetEquippedSeed().name);
                 // spawn crop tile
             }
             else if (collidedObject.tag == cropTag)
             {
-                if (inventory.GetEquippedSeed() == manaCrystal)
+                if (farmingInventory.GetEquippedSeed() == manaCrystal)
                 {
                     SpawnCropTile(manaCrystalRuleTile);
                 }
             }
-            inventory.RemoveOneSeed(inventory.GetEquippedSeed());
+            farmingInventory.RemoveOneSeed(farmingInventory.GetEquippedSeed());
         }
     }
 
@@ -192,7 +192,7 @@ public class Farming : MonoBehaviour
     {
         if (collidedObject.tag == grownCropsTag)
         {
-            inventory.PickUpItem(collidedObject);
+            farmingInventory.PickUpItem(collidedObject);
             ReplaceTile(grassRuleTile); // temp, need to make it different depending on if the ground is fertilized
             Destroy(collidedObject);
             

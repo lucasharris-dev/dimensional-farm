@@ -19,14 +19,14 @@ public class CharacterInteraction : MonoBehaviour
     ChefInteractions chef;
     BlacksmithInteractions blacksmith;
     TravelerInteractions traveler;
-    Inventory inventory;
+    FarmingInventory farmingInventory;
 
 
     void Awake()
     {
         keyboard = Keyboard.current;
         playerGold = GetComponent<PlayerGold>();
-        inventory = GetComponentInParent<Inventory>();
+        farmingInventory = GetComponentInParent<FarmingInventory>();
     }
 
     void Update()

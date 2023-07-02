@@ -32,7 +32,7 @@ public class FollowCursor : MonoBehaviour
 
     Mouse mouse;
     Camera mainCamera;
-    Inventory inventory;
+    FarmingInventory farmingInventory;
 
 
     void Awake()
@@ -41,7 +41,7 @@ public class FollowCursor : MonoBehaviour
 
         mouse = Mouse.current;
         mainCamera = Camera.main;
-        inventory = GetComponentInParent<Inventory>();
+        farmingInventory = GetComponentInParent<FarmingInventory>();
     }
 
     // Update is called once per frame
@@ -49,7 +49,6 @@ public class FollowCursor : MonoBehaviour
     {
         CursorFollow();
         ChangeVisibleCursor();
-        Debug.Log(cursorSprite);
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -100,8 +99,8 @@ public class FollowCursor : MonoBehaviour
         switch (cursorSprite)
         {
             case 1: // equipped tool cursor
-                Debug.Log(inventory.GetEquippedItem().name);
-                inventory.GetEquippedItem().GetComponent<SpriteRenderer>().enabled = true;
+                Debug.Log(farmingInventory.GetEquippedItem().name);
+                farmingInventory.GetEquippedItem().GetComponent<SpriteRenderer>().enabled = true;
                 break;
             case 2: // misc interactions cursor
                 miscCursor.GetComponent<SpriteRenderer>().enabled = true;
@@ -126,7 +125,7 @@ public class FollowCursor : MonoBehaviour
 
     void DisableEquippedToolCursor()
     {
-        inventory.GetEquippedItem().GetComponent<SpriteRenderer>().enabled = false;
+        farmingInventory.GetEquippedItem().GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void DisableMiscCursor()
@@ -143,5 +142,10 @@ public class FollowCursor : MonoBehaviour
     void DisableDefaultCursor()
     {
         defaultCursor.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void SetCursorSprite(int newSprite)
+    {
+        cursorSprite = newSprite;
     }
 }

@@ -8,22 +8,22 @@ public class EquippedItems : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemText;
     [SerializeField] TextMeshProUGUI seedText;
 
-    Inventory inventory;
+    FarmingInventory farmingInventory;
 
     void Awake()
     {
-        inventory = GetComponentInParent<Inventory>(); // not getting
+        farmingInventory = GetComponentInParent<FarmingInventory>(); // not getting
     }
 
     public void UpdateEquippedItemUI()
     {
-        GameObject equippedItem = inventory.GetEquippedItem();
+        GameObject equippedItem = farmingInventory.GetEquippedItem();
         itemText.text = "Item: " + equippedItem.name.ToString();
     }
 
     public void UpdateEquippedSeedUI()
     {
-        GameObject equippedSeed = inventory.GetEquippedSeed();
+        GameObject equippedSeed = farmingInventory.GetEquippedSeed();
         seedText.text = "Seed: " + equippedSeed.name.ToString();
     }
 
