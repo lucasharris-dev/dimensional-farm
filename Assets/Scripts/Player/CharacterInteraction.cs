@@ -87,6 +87,8 @@ public class CharacterInteraction : MonoBehaviour
             return;
         }
 
+        TalkToNPC();
+
         if (canSell && isNextToChef)
         {
             SellItem("name", 3); // temp values for testing
@@ -111,5 +113,11 @@ public class CharacterInteraction : MonoBehaviour
     void BuyItem(string itemName, int itemCount) // change to give the item's gameobject
     {
         merchant.SellToPlayer(itemName, itemCount);
+    }
+
+    void TalkToNPC()
+    {
+        Debug.Log("talking to npc");
+        
     }
 }
